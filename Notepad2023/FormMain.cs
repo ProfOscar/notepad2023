@@ -14,6 +14,7 @@ namespace Notepad2023
     {
         const char EDITED_MARK = '*';
         const string FORM_TITLE_SEPARATOR = " - ";
+        const string SHORT_PROGRAM_NAME = "Blocco note";
         const string PROGRAM_NAME = "Blocco note di Windows";
         string fileName;
 
@@ -40,6 +41,48 @@ namespace Notepad2023
         private void rtbMain_TextChanged(object sender, EventArgs e)
         {
             SetFormTitle(lastSavedText != rtbMain.Text);
+        }
+
+        private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lastSavedText == rtbMain.Text)
+            {
+                rtbMain.Text = "";
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Salvare le modifiche a " + fileName + "?", SHORT_PROGRAM_NAME,
+                    MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    MessageBox.Show("Salvo...");
+                    rtbMain.Text = "";
+                    SetFormTitle();
+                }
+                else if (result == DialogResult.No)
+                {
+                    rtbMain.Text = "";
+                    SetFormTitle();
+                }
+            }
+        }
+
+        public DialogResult CheckIfSave()
+        {
+            if (lastSavedText != rtbMain.Text)
+            {
+                return ShowSaveQuestionMessage();
+            }
+            else
+            {
+                return DialogResult.No;
+            }
+        }
+
+        private DialogResult ShowSaveQuestionMessage()
+        {
+            return MessageBox.Show("Salvare le modifiche a " + fileName + "?", SHORT_PROGRAM_NAME,
+                    MessageBoxButtons.YesNoCancel);
         }
     }
 }
