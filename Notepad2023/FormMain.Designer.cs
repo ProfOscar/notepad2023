@@ -74,6 +74,7 @@
             this.informazionisuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
             this.rtbMain = new System.Windows.Forms.RichTextBox();
+            this.saveFileDialogMain = new System.Windows.Forms.SaveFileDialog();
             this.menuStripTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,6 +151,7 @@
             | System.Windows.Forms.Keys.S)));
             this.salvaconnomeToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.salvaconnomeToolStripMenuItem.Text = "Salva &con nome";
+            this.salvaconnomeToolStripMenuItem.Click += new System.EventHandler(this.salvaconnomeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -439,6 +441,11 @@
             this.rtbMain.WordWrap = false;
             this.rtbMain.TextChanged += new System.EventHandler(this.rtbMain_TextChanged);
             // 
+            // saveFileDialogMain
+            // 
+            this.saveFileDialogMain.DefaultExt = "txt";
+            this.saveFileDialogMain.Filter = "Documenti di testo|*.txt|Tutti i file|*.*";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -505,6 +512,7 @@
         private System.Windows.Forms.ToolStripMenuItem inviaFeedbackToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStripBottom;
         private System.Windows.Forms.RichTextBox rtbMain;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogMain;
     }
 }
 
