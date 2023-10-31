@@ -54,25 +54,26 @@ namespace Notepad2023
 
         private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (lastSavedText == rtbMain.Text)
+            DialogResult result = CheckIfSave();
+            if (result == DialogResult.Yes)
             {
-                rtbMain.Text = "";
-            }
-            else
-            {
-                DialogResult result = CheckIfSave();
-                if (result == DialogResult.Yes)
+                if (filePath != string.Empty)
+                {
+                    saveFile(saveFileDialogMain.FileName);
+                    reset();
+                }
+                else
                 {
                     if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
                     {
                         saveFile(saveFileDialogMain.FileName);
                         reset();
-                    }  
+                    }
                 }
-                else if (result == DialogResult.No)
-                {
-                    reset();
-                }
+            }
+            else if (result == DialogResult.No)
+            {
+                reset();
             }
         }
 
@@ -119,6 +120,18 @@ namespace Notepad2023
             {
                 MessageBox.Show("Problemi durante il salvataggio del file",
                     "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (filePath == string.Empty)
+            {
+                salvaconnomeToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                saveFile(filePath);
             }
         }
     }
