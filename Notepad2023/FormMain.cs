@@ -21,6 +21,7 @@ namespace Notepad2023
         string fileName;
 
         string lastSavedText;
+        DialogResult lastSaveAsDialogResult;
 
         public FormMain()
         {
@@ -97,7 +98,8 @@ namespace Notepad2023
 
         private void salvaconnomeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
+            lastSaveAsDialogResult = saveFileDialogMain.ShowDialog();
+            if (lastSaveAsDialogResult == DialogResult.OK)
             {
                 saveFile(saveFileDialogMain.FileName);
             }
@@ -132,6 +134,49 @@ namespace Notepad2023
             else
             {
                 saveFile(filePath);
+            }
+        }
+
+        private void apriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lastSaveAsDialogResult = DialogResult.None;
+            DialogResult result = CheckIfSave();
+            if (result == DialogResult.Yes)
+            {
+                if (filePath == string.Empty)
+                {
+                    salvaconnomeToolStripMenuItem_Click(sender, e);
+                }
+                else
+                {
+                    saveFile(filePath);
+                }
+            }
+            if (result != DialogResult.Cancel && 
+                lastSaveAsDialogResult != DialogResult.Cancel && 
+                openFileDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                openFile(openFileDialogMain.FileName);
+            }
+        }
+
+        private void openFile(string path)
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    rtbMain.Text = reader.ReadToEnd();
+                }
+                filePath = path;
+                fileName = Path.GetFileName(filePath);
+                lastSavedText = rtbMain.Text;
+                SetFormTitle();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Problemi durante l'apertura del file",
+                                    "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
