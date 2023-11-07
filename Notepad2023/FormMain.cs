@@ -60,7 +60,7 @@ namespace Notepad2023
             {
                 if (filePath != string.Empty)
                 {
-                    saveFile(saveFileDialogMain.FileName);
+                    saveFile(filePath);
                     reset();
                 }
                 else
@@ -177,6 +177,28 @@ namespace Notepad2023
             {
                 MessageBox.Show("Problemi durante l'apertura del file",
                                     "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = CheckIfSave();
+            switch (result)
+            {
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+                case DialogResult.Yes:
+                    if (filePath != string.Empty)
+                        saveFile(filePath);
+                    else
+                    {
+                        if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
+                            saveFile(saveFileDialogMain.FileName);
+                        else
+                            e.Cancel = true;
+                    }
+                    break;
             }
         }
     }
