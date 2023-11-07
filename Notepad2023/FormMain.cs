@@ -152,6 +152,7 @@ namespace Notepad2023
                     saveFile(filePath);
                 }
             }
+            openFileDialogMain.FileName = "";
             if (result != DialogResult.Cancel && 
                 lastSaveAsDialogResult != DialogResult.Cancel && 
                 openFileDialogMain.ShowDialog() == DialogResult.OK)
