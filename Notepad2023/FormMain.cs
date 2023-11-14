@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -224,37 +225,37 @@ namespace Notepad2023
         {
             if (printDialogMain.ShowDialog() == DialogResult.OK)
             {
+                printDocumentMain.OriginAtMargins = true;
                 printDocumentMain.Print();
             }
         }
 
-        private int printedLinesCount;
-        private string[] linesToPrint;
-
+        private string stringToPrint;
         private void printDocumentMain_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            linesToPrint = rtbMain.Text.Split('\n');
-            printedLinesCount = 0;
+            stringToPrint = rtbMain.Text;
         }
 
         private void printDocumentMain_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            int x = e.MarginBounds.Left;
-            int y = e.MarginBounds.Top;
-            Brush brush = new SolidBrush(rtbMain.ForeColor);
+            int charactersOnPage = 0;
+            int linesPerPage = 0;
 
-            while (printedLinesCount < linesToPrint.Length)
-            {
-                e.Graphics.DrawString(linesToPrint[printedLinesCount], rtbMain.Font, brush, x, y);
-                printedLinesCount++;
-                y += rtbMain.Font.Height;
-                if (y>= e.MarginBounds.Bottom)
-                {
-                    e.HasMorePages = true;
-                    return;
-                }
-            }
-            e.HasMorePages = false;       
+            // Sets the value of charactersOnPage to the number of characters 
+            // of stringToPrint that will fit within the bounds of the page.
+            e.Graphics.MeasureString(stringToPrint, rtbMain.Font,
+                e.MarginBounds.Size, StringFormat.GenericTypographic,
+                out charactersOnPage, out linesPerPage);
+
+            // Draws the string within the bounds of the page
+            e.Graphics.DrawString(stringToPrint, rtbMain.Font, new SolidBrush(rtbMain.ForeColor),
+                e.MarginBounds, StringFormat.GenericTypographic);
+
+            // Remove the portion of the string that has been printed.
+            stringToPrint = stringToPrint.Substring(charactersOnPage);
+
+            // Check to see if more pages are to be printed.
+            e.HasMorePages = (stringToPrint.Length > 0);
         }
     }
 }
