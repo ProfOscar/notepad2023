@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Notepad2023
 {
     public partial class FormMain : Form
     {
+        ProcessStartInfo info = new ProcessStartInfo(Application.ExecutablePath);
+
         const char EDITED_MARK = '*';
         const string FORM_TITLE_SEPARATOR = " - ";
         const string SHORT_PROGRAM_NAME = "Blocco note";
@@ -201,6 +204,11 @@ namespace Notepad2023
                     }
                     break;
             }
+        }
+
+        private void nuovaFinestraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(info);
         }
     }
 }
