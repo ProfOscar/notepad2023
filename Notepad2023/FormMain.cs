@@ -33,6 +33,7 @@ namespace Notepad2023
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            pageSetupDialogMain.Document = printDocumentMain;
             reset();
         }
 
@@ -209,6 +210,51 @@ namespace Notepad2023
         private void nuovaFinestraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(info);
+        }
+
+        private void impostaPaginaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pageSetupDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                printDocumentMain.PrinterSettings = pageSetupDialogMain.PrinterSettings;
+            }
+        }
+
+        private void stampaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (printDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                printDocumentMain.Print();
+            }
+        }
+
+        private int printedLinesCount;
+        private string[] linesToPrint;
+
+        private void printDocumentMain_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            linesToPrint = rtbMain.Text.Split('\n');
+            printedLinesCount = 0;
+        }
+
+        private void printDocumentMain_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            int x = e.MarginBounds.Left;
+            int y = e.MarginBounds.Top;
+            Brush brush = new SolidBrush(rtbMain.ForeColor);
+
+            while (printedLinesCount < linesToPrint.Length)
+            {
+                e.Graphics.DrawString(linesToPrint[printedLinesCount], rtbMain.Font, brush, x, y);
+                printedLinesCount++;
+                y += rtbMain.Font.Height;
+                if (y>= e.MarginBounds.Bottom)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+            }
+            e.HasMorePages = false;       
         }
     }
 }
