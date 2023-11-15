@@ -73,7 +73,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.informazionisuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
-            this.rtbMain = new System.Windows.Forms.RichTextBox();
+            this.rtbMain = new RichTextBoxEx();
             this.saveFileDialogMain = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogMain = new System.Windows.Forms.OpenFileDialog();
             this.pageSetupDialogMain = new System.Windows.Forms.PageSetupDialog();
@@ -535,7 +535,7 @@
         private System.Windows.Forms.ToolStripMenuItem guidaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inviaFeedbackToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStripBottom;
-        private System.Windows.Forms.RichTextBox rtbMain;
+        private RichTextBoxEx rtbMain;
         private System.Windows.Forms.SaveFileDialog saveFileDialogMain;
         private System.Windows.Forms.OpenFileDialog openFileDialogMain;
         private System.Windows.Forms.PageSetupDialog pageSetupDialogMain;
