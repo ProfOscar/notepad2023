@@ -34,6 +34,7 @@ namespace Notepad2023
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            pageSetupDialogMain.EnableMetric = true;
             pageSetupDialogMain.Document = printDocumentMain;
             reset();
         }
@@ -215,35 +216,47 @@ namespace Notepad2023
 
         private void impostaPaginaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (pageSetupDialogMain.ShowDialog() == DialogResult.OK)
-            {
-                printDocumentMain.PrinterSettings = pageSetupDialogMain.PrinterSettings;
-            }
+            pageSetupDialogMain.ShowDialog();
         }
 
         private void stampaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (printDialogMain.ShowDialog() == DialogResult.OK)
+            try
             {
-                printDocumentMain.OriginAtMargins = true;
-                printDocumentMain.Print();
+                if (printDialogMain.ShowDialog() == DialogResult.OK)
+                {
+                    printDocumentMain.DocumentName = fileName;
+                    printDocumentMain.Print();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Problemi durante la stampa.\nSe stai stampando su file verifica che il file di destinazione non sia aperto.",
+                    "ATTENZIONE!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
 
-        private int m_nFirstCharOnPage;
+        private int nFirstCharOnPage;
         private void printDocumentMain_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            m_nFirstCharOnPage = 0;
+            nFirstCharOnPage = 0;
         }
 
         private void printDocumentMain_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            m_nFirstCharOnPage = rtbMain.FormatRange(false,
+            nFirstCharOnPage = rtbMain.FormatRange(false,
                                                        e,
-                                                       m_nFirstCharOnPage,
+                                                       nFirstCharOnPage,
                                                        rtbMain.TextLength);
             // check if there are more pages to print
-            e.HasMorePages = m_nFirstCharOnPage < rtbMain.TextLength;
+            e.HasMorePages = nFirstCharOnPage < rtbMain.TextLength;
+        }
+
+        private void printDocumentMain_EndPrint(object sender, PrintEventArgs e)
+        {
+            rtbMain.FormatRangeDone();
         }
     }
 }

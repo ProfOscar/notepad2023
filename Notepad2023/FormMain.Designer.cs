@@ -73,7 +73,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.informazionisuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
-            this.rtbMain = new RichTextBoxEx();
+            this.rtbMain = new Notepad2023.RichTextBoxEx();
             this.saveFileDialogMain = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogMain = new System.Windows.Forms.OpenFileDialog();
             this.pageSetupDialogMain = new System.Windows.Forms.PageSetupDialog();
@@ -467,6 +467,7 @@
             // printDocumentMain
             // 
             this.printDocumentMain.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocumentMain_BeginPrint);
+            this.printDocumentMain.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocumentMain_EndPrint);
             this.printDocumentMain.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocumentMain_PrintPage);
             // 
             // FormMain
