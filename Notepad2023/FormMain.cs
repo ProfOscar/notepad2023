@@ -32,6 +32,8 @@ namespace Notepad2023
             InitializeComponent();
         }
 
+        #region Event Handlers
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             pageSetupDialogMain.EnableMetric = true;
@@ -48,6 +50,68 @@ namespace Notepad2023
             incollaToolStripMenuItem.Enabled = Clipboard.ContainsText() || Clipboard.ContainsImage();
         }
 
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = CheckIfSave();
+            switch (result)
+            {
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+                case DialogResult.Yes:
+                    if (filePath != string.Empty)
+                        saveFile(filePath);
+                    else
+                    {
+                        if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
+                            saveFile(saveFileDialogMain.FileName);
+                        else
+                            e.Cancel = true;
+                    }
+                    break;
+            }
+        }
+
+        private void rtbMain_TextChanged(object sender, EventArgs e)
+        {
+            SetFormTitle(lastSavedText != rtbMain.Text);
+            annullaToolStripMenuItem.Enabled = rtbMain.CanUndo || rtbMain.CanRedo;
+        }
+
+        private void rtbMain_SelectionChanged(object sender, EventArgs e)
+        {
+            copiaToolStripMenuItem.Enabled =
+                tagliaToolStripMenuItem.Enabled =
+                eliminaToolStripMenuItem.Enabled =
+                rtbMain.SelectionLength > 0;
+        }
+
+        private int nFirstCharOnPage;
+        private void printDocumentMain_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            nFirstCharOnPage = 0;
+        }
+
+        private void printDocumentMain_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            nFirstCharOnPage = rtbMain.FormatRange(false,
+                                                       e,
+                                                       nFirstCharOnPage,
+                                                       rtbMain.TextLength);
+            // check if there are more pages to print
+            e.HasMorePages = nFirstCharOnPage < rtbMain.TextLength;
+        }
+
+        private void printDocumentMain_EndPrint(object sender, PrintEventArgs e)
+        {
+            rtbMain.FormatRangeDone();
+        }
+
+        #endregion
+
+
+        #region Custom Methods
+
         private void reset()
         {
             rtbMain.Text = string.Empty;
@@ -63,11 +127,68 @@ namespace Notepad2023
             this.Text += fileName + FORM_TITLE_SEPARATOR + PROGRAM_NAME;
         }
 
-        private void rtbMain_TextChanged(object sender, EventArgs e)
+        public DialogResult CheckIfSave()
         {
-            SetFormTitle(lastSavedText != rtbMain.Text);
-            annullaToolStripMenuItem.Enabled = rtbMain.CanUndo || rtbMain.CanRedo;
+            if (lastSavedText != rtbMain.Text)
+            {
+                return ShowSaveQuestionMessage();
+            }
+            else
+            {
+                return DialogResult.No;
+            }
         }
+
+        private DialogResult ShowSaveQuestionMessage()
+        {
+            return MessageBox.Show("Salvare le modifiche a " + fileName + "?", SHORT_PROGRAM_NAME,
+                    MessageBoxButtons.YesNoCancel);
+        }
+        
+        private void saveFile(string path)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(path))
+                {
+                    writer.Write(rtbMain.Text);
+                }
+                filePath = path;
+                fileName = Path.GetFileName(filePath);
+                lastSavedText = rtbMain.Text;
+                SetFormTitle();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Problemi durante il salvataggio del file",
+                    "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void openFile(string path)
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    rtbMain.Text = reader.ReadToEnd();
+                }
+                filePath = path;
+                fileName = Path.GetFileName(filePath);
+                lastSavedText = rtbMain.Text;
+                SetFormTitle();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Problemi durante l'apertura del file",
+                                    "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        #endregion
+
+
+        #region Click Handlers
 
         private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -94,63 +215,9 @@ namespace Notepad2023
             }
         }
 
-        public DialogResult CheckIfSave()
+        private void nuovaFinestraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (lastSavedText != rtbMain.Text)
-            {
-                return ShowSaveQuestionMessage();
-            }
-            else
-            {
-                return DialogResult.No;
-            }
-        }
-
-        private DialogResult ShowSaveQuestionMessage()
-        {
-            return MessageBox.Show("Salvare le modifiche a " + fileName + "?", SHORT_PROGRAM_NAME,
-                    MessageBoxButtons.YesNoCancel);
-        }
-
-        private void salvaconnomeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lastSaveAsDialogResult = saveFileDialogMain.ShowDialog();
-            if (lastSaveAsDialogResult == DialogResult.OK)
-            {
-                saveFile(saveFileDialogMain.FileName);
-            }
-        }
-
-        private void saveFile(string path)
-        {
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(path))
-                {
-                    writer.Write(rtbMain.Text);
-                }
-                filePath = path;
-                fileName = Path.GetFileName(filePath);
-                lastSavedText = rtbMain.Text;
-                SetFormTitle();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Problemi durante il salvataggio del file",
-                    "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (filePath == string.Empty)
-            {
-                salvaconnomeToolStripMenuItem_Click(sender, e);
-            }
-            else
-            {
-                saveFile(filePath);
-            }
+            Process.Start(info);
         }
 
         private void apriToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,59 +236,33 @@ namespace Notepad2023
                 }
             }
             openFileDialogMain.FileName = "";
-            if (result != DialogResult.Cancel && 
-                lastSaveAsDialogResult != DialogResult.Cancel && 
+            if (result != DialogResult.Cancel &&
+                lastSaveAsDialogResult != DialogResult.Cancel &&
                 openFileDialogMain.ShowDialog() == DialogResult.OK)
             {
                 openFile(openFileDialogMain.FileName);
             }
         }
 
-        private void openFile(string path)
+        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            if (filePath == string.Empty)
             {
-                using (StreamReader reader = new StreamReader(path))
-                {
-                    rtbMain.Text = reader.ReadToEnd();
-                }
-                filePath = path;
-                fileName = Path.GetFileName(filePath);
-                lastSavedText = rtbMain.Text;
-                SetFormTitle();
+                salvaconnomeToolStripMenuItem_Click(sender, e);
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Problemi durante l'apertura del file",
-                                    "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                saveFile(filePath);
             }
         }
 
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void salvaconnomeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = CheckIfSave();
-            switch (result)
+            lastSaveAsDialogResult = saveFileDialogMain.ShowDialog();
+            if (lastSaveAsDialogResult == DialogResult.OK)
             {
-                case DialogResult.Cancel:
-                    e.Cancel = true;
-                    break;
-                case DialogResult.Yes:
-                    if (filePath != string.Empty)
-                        saveFile(filePath);
-                    else
-                    {
-                        if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
-                            saveFile(saveFileDialogMain.FileName);
-                        else
-                            e.Cancel = true;
-                    }
-                    break;
+                saveFile(saveFileDialogMain.FileName);
             }
-        }
-
-        private void nuovaFinestraToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start(info);
         }
 
         private void impostaPaginaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -248,38 +289,9 @@ namespace Notepad2023
             }
         }
 
-        private int nFirstCharOnPage;
-        private void printDocumentMain_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            nFirstCharOnPage = 0;
-        }
-
-        private void printDocumentMain_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            nFirstCharOnPage = rtbMain.FormatRange(false,
-                                                       e,
-                                                       nFirstCharOnPage,
-                                                       rtbMain.TextLength);
-            // check if there are more pages to print
-            e.HasMorePages = nFirstCharOnPage < rtbMain.TextLength;
-        }
-
-        private void printDocumentMain_EndPrint(object sender, PrintEventArgs e)
-        {
-            rtbMain.FormatRangeDone();
-        }
-
         private void esciToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void rtbMain_SelectionChanged(object sender, EventArgs e)
-        {
-            copiaToolStripMenuItem.Enabled = 
-                tagliaToolStripMenuItem.Enabled = 
-                eliminaToolStripMenuItem.Enabled = 
-                rtbMain.SelectionLength > 0;
         }
 
         private void annullaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -309,5 +321,17 @@ namespace Notepad2023
         {
             rtbMain.SelectedText = "";
         }
+
+        private void selezionatuttoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.SelectAll();
+        }
+
+        private void oraDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.SelectedText = DateTime.Now.ToString("H:mm dd/MM/yyyy");
+        }
+
+        #endregion
     }
 }

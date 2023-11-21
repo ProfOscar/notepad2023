@@ -326,6 +326,7 @@
             this.selezionatuttoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.selezionatuttoToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.selezionatuttoToolStripMenuItem.Text = "Seleziona &tutto";
+            this.selezionatuttoToolStripMenuItem.Click += new System.EventHandler(this.selezionatuttoToolStripMenuItem_Click);
             // 
             // oraDataToolStripMenuItem
             // 
@@ -333,6 +334,7 @@
             this.oraDataToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.oraDataToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.oraDataToolStripMenuItem.Text = "Ora/&Data";
+            this.oraDataToolStripMenuItem.Click += new System.EventHandler(this.oraDataToolStripMenuItem_Click);
             // 
             // formatoToolStripMenuItem
             // 
