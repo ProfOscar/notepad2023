@@ -36,7 +36,16 @@ namespace Notepad2023
         {
             pageSetupDialogMain.EnableMetric = true;
             pageSetupDialogMain.Document = printDocumentMain;
+            annullaToolStripMenuItem.Enabled = false;
+            copiaToolStripMenuItem.Enabled = false;
+            tagliaToolStripMenuItem.Enabled = false;
+            eliminaToolStripMenuItem.Enabled = false;
             reset();
+        }
+
+        private void FormMain_Activated(object sender, EventArgs e)
+        {
+            incollaToolStripMenuItem.Enabled = Clipboard.ContainsText() || Clipboard.ContainsImage();
         }
 
         private void reset()
@@ -57,6 +66,7 @@ namespace Notepad2023
         private void rtbMain_TextChanged(object sender, EventArgs e)
         {
             SetFormTitle(lastSavedText != rtbMain.Text);
+            annullaToolStripMenuItem.Enabled = rtbMain.CanUndo || rtbMain.CanRedo;
         }
 
         private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -257,6 +267,47 @@ namespace Notepad2023
         private void printDocumentMain_EndPrint(object sender, PrintEventArgs e)
         {
             rtbMain.FormatRangeDone();
+        }
+
+        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void rtbMain_SelectionChanged(object sender, EventArgs e)
+        {
+            copiaToolStripMenuItem.Enabled = 
+                tagliaToolStripMenuItem.Enabled = 
+                eliminaToolStripMenuItem.Enabled = 
+                rtbMain.SelectionLength > 0;
+        }
+
+        private void annullaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rtbMain.CanRedo)
+                rtbMain.Redo();
+            else
+                rtbMain.Undo();
+        }
+
+        private void tagliaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.Cut();
+        }
+
+        private void copiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.Copy();
+        }
+
+        private void incollaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.Paste();
+        }
+
+        private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.SelectedText = "";
         }
     }
 }
