@@ -78,6 +78,7 @@
             this.pageSetupDialogMain = new System.Windows.Forms.PageSetupDialog();
             this.printDialogMain = new System.Windows.Forms.PrintDialog();
             this.printDocumentMain = new System.Drawing.Printing.PrintDocument();
+            this.fontDialogMain = new System.Windows.Forms.FontDialog();
             this.rtbMain = new Notepad2023.RichTextBoxEx();
             this.menuStripTop.SuspendLayout();
             this.SuspendLayout();
@@ -350,12 +351,14 @@
             this.aCapoAutomaticoToolStripMenuItem.Name = "aCapoAutomaticoToolStripMenuItem";
             this.aCapoAutomaticoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.aCapoAutomaticoToolStripMenuItem.Text = "A capo a&utomatico";
+            this.aCapoAutomaticoToolStripMenuItem.Click += new System.EventHandler(this.aCapoAutomaticoToolStripMenuItem_Click);
             // 
             // carattereToolStripMenuItem
             // 
             this.carattereToolStripMenuItem.Name = "carattereToolStripMenuItem";
             this.carattereToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.carattereToolStripMenuItem.Text = "Cara&ttere...";
+            this.carattereToolStripMenuItem.Click += new System.EventHandler(this.carattereToolStripMenuItem_Click);
             // 
             // visualizzaToolStripMenuItem
             // 
@@ -404,6 +407,7 @@
             this.barradistatoToolStripMenuItem.Name = "barradistatoToolStripMenuItem";
             this.barradistatoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.barradistatoToolStripMenuItem.Text = "Barra di &stato";
+            this.barradistatoToolStripMenuItem.Click += new System.EventHandler(this.barradistatoToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem
             // 
@@ -421,12 +425,14 @@
             this.guidaToolStripMenuItem.Name = "guidaToolStripMenuItem";
             this.guidaToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.guidaToolStripMenuItem.Text = "&Guida";
+            this.guidaToolStripMenuItem.Click += new System.EventHandler(this.guidaToolStripMenuItem_Click);
             // 
             // inviaFeedbackToolStripMenuItem
             // 
             this.inviaFeedbackToolStripMenuItem.Name = "inviaFeedbackToolStripMenuItem";
             this.inviaFeedbackToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.inviaFeedbackToolStripMenuItem.Text = "&Invia feedback";
+            this.inviaFeedbackToolStripMenuItem.Click += new System.EventHandler(this.inviaFeedbackToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -438,6 +444,7 @@
             this.informazionisuToolStripMenuItem.Name = "informazionisuToolStripMenuItem";
             this.informazionisuToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.informazionisuToolStripMenuItem.Text = "Informazioni &su Blocco note";
+            this.informazionisuToolStripMenuItem.Click += new System.EventHandler(this.informazionisuToolStripMenuItem_Click);
             // 
             // statusStripBottom
             // 
@@ -552,6 +559,7 @@
         private System.Windows.Forms.PageSetupDialog pageSetupDialogMain;
         private System.Windows.Forms.PrintDialog printDialogMain;
         private System.Drawing.Printing.PrintDocument printDocumentMain;
+        private System.Windows.Forms.FontDialog fontDialogMain;
     }
 }
 

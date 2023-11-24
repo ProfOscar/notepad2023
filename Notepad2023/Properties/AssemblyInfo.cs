@@ -1,17 +1,18 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Le informazioni generali relative a un assembly sono controllate dal seguente 
 // set di attributi. Modificare i valori di questi attributi per modificare le informazioni
 // associate a un assembly.
-[assembly: AssemblyTitle("Notepad2023")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Blocco note")]
+[assembly: AssemblyDescription("Progetto didattico realizzato nel 1° trimestre dalla classe 4 INF B nell'anno scolastico 2023/24.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("IIS Vallauri")]
 [assembly: AssemblyProduct("Notepad2023")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © Vallauri 2023")]
+[assembly: AssemblyTrademark("® 4 INF B 2023")]
 [assembly: AssemblyCulture("")]
 
 // Se si imposta ComVisible su false, i tipi in questo assembly non saranno visibili
@@ -34,3 +35,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("it")]

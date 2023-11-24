@@ -42,6 +42,14 @@ namespace Notepad2023
             copiaToolStripMenuItem.Enabled = false;
             tagliaToolStripMenuItem.Enabled = false;
             eliminaToolStripMenuItem.Enabled = false;
+            aCapoAutomaticoToolStripMenuItem.Checked = false;
+            aCapoAutomaticoToolStripMenuItem.CheckOnClick = true;
+            rtbMain.WordWrap = aCapoAutomaticoToolStripMenuItem.Checked;
+            rtbMain.Font = new Font("Consolas", 11, FontStyle.Regular);
+            fontDialogMain.Font = rtbMain.Font;
+            barradistatoToolStripMenuItem.Checked = true;
+            barradistatoToolStripMenuItem.CheckOnClick = true;
+            statusStripBottom.Visible = barradistatoToolStripMenuItem.Checked;
             reset();
         }
 
@@ -333,5 +341,37 @@ namespace Notepad2023
         }
 
         #endregion
+
+        private void aCapoAutomaticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.WordWrap = aCapoAutomaticoToolStripMenuItem.Checked;
+        }
+
+        private void carattereToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fontDialogMain.ShowDialog() == DialogResult.OK)
+                rtbMain.Font = fontDialogMain.Font;
+        }
+
+        private void barradistatoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            statusStripBottom.Visible = barradistatoToolStripMenuItem.Checked;
+        }
+
+        private void guidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://go.microsoft.com/fwlink/?LinkId=834783");
+        }
+
+        private void inviaFeedbackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/ProfOscar/calculator2023/issues");
+        }
+
+        private void informazionisuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBoxMain aboutForm = new AboutBoxMain();
+            aboutForm.ShowDialog();
+        }
     }
 }
