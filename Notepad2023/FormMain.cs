@@ -42,6 +42,7 @@ namespace Notepad2023
             copiaToolStripMenuItem.Enabled = false;
             tagliaToolStripMenuItem.Enabled = false;
             eliminaToolStripMenuItem.Enabled = false;
+            vaiAToolStripMenuItem.Enabled = true;
             aCapoAutomaticoToolStripMenuItem.Checked = false;
             aCapoAutomaticoToolStripMenuItem.CheckOnClick = true;
             rtbMain.WordWrap = aCapoAutomaticoToolStripMenuItem.Checked;
@@ -330,6 +331,16 @@ namespace Notepad2023
             rtbMain.SelectedText = "";
         }
 
+        private void vaiAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGotoLine frmGotoLine = new FormGotoLine(rtbMain.Lines.Length);
+            if (frmGotoLine.ShowDialog() == DialogResult.OK)
+            {
+                int charToGo = rtbMain.GetFirstCharIndexFromLine(frmGotoLine.nLine - 1);
+                rtbMain.SelectionStart = charToGo;
+            }
+        }
+
         private void selezionatuttoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rtbMain.SelectAll();
@@ -340,17 +351,33 @@ namespace Notepad2023
             rtbMain.SelectedText = DateTime.Now.ToString("H:mm dd/MM/yyyy");
         }
 
-        #endregion
-
         private void aCapoAutomaticoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rtbMain.WordWrap = aCapoAutomaticoToolStripMenuItem.Checked;
+            vaiAToolStripMenuItem.Enabled = !rtbMain.WordWrap;
         }
 
         private void carattereToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (fontDialogMain.ShowDialog() == DialogResult.OK)
                 rtbMain.Font = fontDialogMain.Font;
+        }
+
+        private void zoomAvantiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rtbMain.ZoomFactor < 5)
+                rtbMain.ZoomFactor += (float)0.1;
+        }
+
+        private void zoomIndietroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rtbMain.ZoomFactor >= 0.2)
+                rtbMain.ZoomFactor -= 0.1f;
+        }
+
+        private void ripristinaZoomPredefinitoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtbMain.ZoomFactor = 1;
         }
 
         private void barradistatoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -374,21 +401,7 @@ namespace Notepad2023
             aboutForm.ShowDialog();
         }
 
-        private void zoomAvantiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (rtbMain.ZoomFactor < 5)
-                rtbMain.ZoomFactor += (float)0.1;
-        }
+        #endregion
 
-        private void zoomIndietroToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (rtbMain.ZoomFactor >= 0.2)
-                rtbMain.ZoomFactor -= 0.1f;
-        }
-
-        private void ripristinaZoomPredefinitoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            rtbMain.ZoomFactor = 1;
-        }
     }
 }

@@ -315,6 +315,7 @@
             this.vaiAToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.vaiAToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.vaiAToolStripMenuItem.Text = "&Vai a...";
+            this.vaiAToolStripMenuItem.Click += new System.EventHandler(this.vaiAToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
@@ -376,7 +377,7 @@
             this.zoomIndietroToolStripMenuItem,
             this.ripristinaZoomPredefinitoToolStripMenuItem});
             this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.zoomToolStripMenuItem.Text = "&Zoom";
             // 
             // zoomAvantiToolStripMenuItem
@@ -408,7 +409,7 @@
             this.barradistatoToolStripMenuItem.Checked = true;
             this.barradistatoToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.barradistatoToolStripMenuItem.Name = "barradistatoToolStripMenuItem";
-            this.barradistatoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.barradistatoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.barradistatoToolStripMenuItem.Text = "Barra di &stato";
             this.barradistatoToolStripMenuItem.Click += new System.EventHandler(this.barradistatoToolStripMenuItem_Click);
             // 
