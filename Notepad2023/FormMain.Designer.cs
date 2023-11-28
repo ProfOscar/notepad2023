@@ -376,7 +376,7 @@
             this.zoomIndietroToolStripMenuItem,
             this.ripristinaZoomPredefinitoToolStripMenuItem});
             this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zoomToolStripMenuItem.Text = "&Zoom";
             // 
             // zoomAvantiToolStripMenuItem
@@ -385,6 +385,7 @@
             this.zoomAvantiToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
             this.zoomAvantiToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.zoomAvantiToolStripMenuItem.Text = "&Zoom avanti";
+            this.zoomAvantiToolStripMenuItem.Click += new System.EventHandler(this.zoomAvantiToolStripMenuItem_Click);
             // 
             // zoomIndietroToolStripMenuItem
             // 
@@ -392,6 +393,7 @@
             this.zoomIndietroToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
             this.zoomIndietroToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.zoomIndietroToolStripMenuItem.Text = "&Zoom indietro";
+            this.zoomIndietroToolStripMenuItem.Click += new System.EventHandler(this.zoomIndietroToolStripMenuItem_Click);
             // 
             // ripristinaZoomPredefinitoToolStripMenuItem
             // 
@@ -399,13 +401,14 @@
             this.ripristinaZoomPredefinitoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
             this.ripristinaZoomPredefinitoToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.ripristinaZoomPredefinitoToolStripMenuItem.Text = "&Ripristina zoom predefinito";
+            this.ripristinaZoomPredefinitoToolStripMenuItem.Click += new System.EventHandler(this.ripristinaZoomPredefinitoToolStripMenuItem_Click);
             // 
             // barradistatoToolStripMenuItem
             // 
             this.barradistatoToolStripMenuItem.Checked = true;
             this.barradistatoToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.barradistatoToolStripMenuItem.Name = "barradistatoToolStripMenuItem";
-            this.barradistatoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.barradistatoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.barradistatoToolStripMenuItem.Text = "Barra di &stato";
             this.barradistatoToolStripMenuItem.Click += new System.EventHandler(this.barradistatoToolStripMenuItem_Click);
             // 
