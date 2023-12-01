@@ -42,6 +42,7 @@ namespace Notepad2023
             copiaToolStripMenuItem.Enabled = false;
             tagliaToolStripMenuItem.Enabled = false;
             eliminaToolStripMenuItem.Enabled = false;
+            cercaConBingToolStripMenuItem.Enabled = false;
             vaiAToolStripMenuItem.Enabled = true;
             aCapoAutomaticoToolStripMenuItem.Checked = false;
             aCapoAutomaticoToolStripMenuItem.CheckOnClick = true;
@@ -92,6 +93,7 @@ namespace Notepad2023
             copiaToolStripMenuItem.Enabled =
                 tagliaToolStripMenuItem.Enabled =
                 eliminaToolStripMenuItem.Enabled =
+                cercaConBingToolStripMenuItem.Enabled =
                 rtbMain.SelectionLength > 0;
         }
 
@@ -403,5 +405,12 @@ namespace Notepad2023
 
         #endregion
 
+        private void cercaConBingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string url = "https://www.bing.com/search?q=";
+            // TODO: comporre la chiave di ricerca
+            string key = rtbMain.SelectedText.Trim().Substring(0,2000);
+            Process.Start(url + key);
+        }
     }
 }
