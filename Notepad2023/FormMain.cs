@@ -52,6 +52,7 @@ namespace Notepad2023
             barradistatoToolStripMenuItem.Checked = true;
             barradistatoToolStripMenuItem.CheckOnClick = true;
             statusStripBottom.Visible = barradistatoToolStripMenuItem.Checked;
+            writeZoomInStatusBar();
             reset();
         }
 
@@ -367,19 +368,30 @@ namespace Notepad2023
 
         private void zoomAvantiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (rtbMain.ZoomFactor < 5)
+            if (rtbMain.ZoomFactor < 5) { 
                 rtbMain.ZoomFactor += (float)0.1;
+                writeZoomInStatusBar();
+            }
         }
 
         private void zoomIndietroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (rtbMain.ZoomFactor >= 0.2)
+            if (rtbMain.ZoomFactor >= 0.2) { 
                 rtbMain.ZoomFactor -= 0.1f;
+                writeZoomInStatusBar();
+            }
         }
 
         private void ripristinaZoomPredefinitoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rtbMain.ZoomFactor = 1;
+            writeZoomInStatusBar();
+        }
+
+        private void writeZoomInStatusBar()
+        {
+            int n = (int)(rtbMain.ZoomFactor * 10);
+            toolStripStatusLabelZoom.Text = n + "0%";
         }
 
         private void barradistatoToolStripMenuItem_Click(object sender, EventArgs e)
