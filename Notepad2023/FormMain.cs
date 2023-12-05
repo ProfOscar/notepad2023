@@ -22,6 +22,11 @@ namespace Notepad2023
         const string FORM_TITLE_SEPARATOR = " - ";
         const string SHORT_PROGRAM_NAME = "Blocco note";
         const string PROGRAM_NAME = "Blocco note di Windows";
+
+        const string WIN = "Windows (CRLF)";
+        const string MAC = "Macintosh (CR)";
+        const string LIN = "Unix (LF)";
+
         string filePath;
         string fileName;
 
@@ -143,6 +148,7 @@ namespace Notepad2023
             fileName = "Senza nome";
             SetFormTitle();
             toolStripStatusLabelLineColumn.Text = "Linea 1, colonna 1";
+            toolStripStatusLabelLineEnding.Text = WIN;
         }
 
         private void SetFormTitle(bool isEdited = false)
@@ -195,7 +201,11 @@ namespace Notepad2023
             {
                 using (StreamReader reader = new StreamReader(path))
                 {
-                    rtbMain.Text = reader.ReadToEnd();
+                    string rawText = reader.ReadToEnd();
+                    if (rawText.Contains("\r\n")) toolStripStatusLabelLineEnding.Text = WIN;
+                    else if (rawText.Contains("\r")) toolStripStatusLabelLineEnding.Text = MAC;
+                    else if (rawText.Contains("\n")) toolStripStatusLabelLineEnding.Text = LIN;
+                    rtbMain.Text = rawText;
                 }
                 filePath = path;
                 fileName = Path.GetFileName(filePath);
