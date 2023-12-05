@@ -210,11 +210,15 @@ namespace Notepad2023
         }
         private void writeLineColumnInStatusBar()
         {
+            // Questa if serve per un bug sull'evento SelectionChanged del RichTextBox
+            // che si verifica quando si attiva il word-wrap
             if (rtbMain.Text.Length > 0)
             {
                 string stTextPart = rtbMain.Text.Substring(0, rtbMain.SelectionStart);
                 int line = Regex.Matches(stTextPart, @"\n").Count + 1;
+                // int line = rtbMain.GetLineFromCharIndex(rtbMain.SelectionStart) + 1;
                 int column = rtbMain.SelectionStart - stTextPart.LastIndexOf('\n');
+                // int column = rtbMain.SelectionStart - rtbMain.GetFirstCharIndexOfCurrentLine() + 1;
                 string stToWrite = $"Linea {line}, colonna {column}";
                 toolStripStatusLabelLineColumn.Text = stToWrite;
             }
