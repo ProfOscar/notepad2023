@@ -48,6 +48,7 @@ namespace Notepad2023
             aCapoAutomaticoToolStripMenuItem.CheckOnClick = true;
             rtbMain.WordWrap = aCapoAutomaticoToolStripMenuItem.Checked;
             rtbMain.Font = new Font("Consolas", 11, FontStyle.Regular);
+            rtbMain.MouseWheel += rtbMain_MouseWheel;
             fontDialogMain.Font = rtbMain.Font;
             barradistatoToolStripMenuItem.Checked = true;
             barradistatoToolStripMenuItem.CheckOnClick = true;
@@ -96,6 +97,14 @@ namespace Notepad2023
                 eliminaToolStripMenuItem.Enabled =
                 cercaConBingToolStripMenuItem.Enabled =
                 rtbMain.SelectionLength > 0;
+        }
+
+        private void rtbMain_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if ((ModifierKeys & Keys.Control) == Keys.Control)
+            {
+                writeZoomInStatusBar();
+            }
         }
 
         private int nFirstCharOnPage;
@@ -415,8 +424,6 @@ namespace Notepad2023
             aboutForm.ShowDialog();
         }
 
-        #endregion
-
         private void cercaConBingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string url = "https://www.bing.com/search?q=";
@@ -424,5 +431,8 @@ namespace Notepad2023
             string key = rtbMain.SelectedText.Trim().Substring(0,2000);
             Process.Start(url + key);
         }
+
+        #endregion
+
     }
 }

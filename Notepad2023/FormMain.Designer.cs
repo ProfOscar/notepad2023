@@ -73,6 +73,10 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.informazionisuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelEncoding = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelLineEnding = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelZoom = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelLineColumn = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileDialogMain = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogMain = new System.Windows.Forms.OpenFileDialog();
             this.pageSetupDialogMain = new System.Windows.Forms.PageSetupDialog();
@@ -80,10 +84,6 @@
             this.printDocumentMain = new System.Drawing.Printing.PrintDocument();
             this.fontDialogMain = new System.Windows.Forms.FontDialog();
             this.rtbMain = new Notepad2023.RichTextBoxEx();
-            this.toolStripStatusLabelEncoding = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelLineEnding = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelZoom = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelLineColumn = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStripTop.SuspendLayout();
             this.statusStripBottom.SuspendLayout();
             this.SuspendLayout();
@@ -469,39 +469,6 @@
             this.statusStripBottom.Size = new System.Drawing.Size(484, 24);
             this.statusStripBottom.TabIndex = 1;
             // 
-            // saveFileDialogMain
-            // 
-            this.saveFileDialogMain.DefaultExt = "txt";
-            this.saveFileDialogMain.Filter = "Documenti di testo|*.txt|Tutti i file|*.*";
-            // 
-            // openFileDialogMain
-            // 
-            this.openFileDialogMain.DefaultExt = "txt";
-            this.openFileDialogMain.Filter = "Documenti di testo|*.txt|Tutti i file|*.*";
-            // 
-            // printDialogMain
-            // 
-            this.printDialogMain.UseEXDialog = true;
-            // 
-            // printDocumentMain
-            // 
-            this.printDocumentMain.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocumentMain_BeginPrint);
-            this.printDocumentMain.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocumentMain_EndPrint);
-            this.printDocumentMain.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocumentMain_PrintPage);
-            // 
-            // rtbMain
-            // 
-            this.rtbMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbMain.Location = new System.Drawing.Point(0, 24);
-            this.rtbMain.Name = "rtbMain";
-            this.rtbMain.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.rtbMain.Size = new System.Drawing.Size(484, 293);
-            this.rtbMain.TabIndex = 2;
-            this.rtbMain.Text = "";
-            this.rtbMain.WordWrap = false;
-            this.rtbMain.SelectionChanged += new System.EventHandler(this.rtbMain_SelectionChanged);
-            this.rtbMain.TextChanged += new System.EventHandler(this.rtbMain_TextChanged);
-            // 
             // toolStripStatusLabelEncoding
             // 
             this.toolStripStatusLabelEncoding.AutoSize = false;
@@ -548,6 +515,39 @@
             this.toolStripStatusLabelLineColumn.Size = new System.Drawing.Size(150, 19);
             this.toolStripStatusLabelLineColumn.Text = "(LINE_COLUMN)";
             this.toolStripStatusLabelLineColumn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // saveFileDialogMain
+            // 
+            this.saveFileDialogMain.DefaultExt = "txt";
+            this.saveFileDialogMain.Filter = "Documenti di testo|*.txt|Tutti i file|*.*";
+            // 
+            // openFileDialogMain
+            // 
+            this.openFileDialogMain.DefaultExt = "txt";
+            this.openFileDialogMain.Filter = "Documenti di testo|*.txt|Tutti i file|*.*";
+            // 
+            // printDialogMain
+            // 
+            this.printDialogMain.UseEXDialog = true;
+            // 
+            // printDocumentMain
+            // 
+            this.printDocumentMain.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocumentMain_BeginPrint);
+            this.printDocumentMain.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocumentMain_EndPrint);
+            this.printDocumentMain.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocumentMain_PrintPage);
+            // 
+            // rtbMain
+            // 
+            this.rtbMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbMain.Location = new System.Drawing.Point(0, 24);
+            this.rtbMain.Name = "rtbMain";
+            this.rtbMain.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+            this.rtbMain.Size = new System.Drawing.Size(484, 293);
+            this.rtbMain.TabIndex = 2;
+            this.rtbMain.Text = "";
+            this.rtbMain.WordWrap = false;
+            this.rtbMain.SelectionChanged += new System.EventHandler(this.rtbMain_SelectionChanged);
+            this.rtbMain.TextChanged += new System.EventHandler(this.rtbMain_TextChanged);
             // 
             // FormMain
             // 
