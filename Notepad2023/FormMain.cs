@@ -8,6 +8,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -97,6 +98,7 @@ namespace Notepad2023
                 eliminaToolStripMenuItem.Enabled =
                 cercaConBingToolStripMenuItem.Enabled =
                 rtbMain.SelectionLength > 0;
+            writeLineColumnInStatusBar();
         }
 
         private void rtbMain_MouseWheel(object sender, MouseEventArgs e)
@@ -140,6 +142,7 @@ namespace Notepad2023
             filePath = string.Empty;
             fileName = "Senza nome";
             SetFormTitle();
+            toolStripStatusLabelLineColumn.Text = "Linea 1, colonna 1";
         }
 
         private void SetFormTitle(bool isEdited = false)
@@ -203,6 +206,21 @@ namespace Notepad2023
             {
                 MessageBox.Show("Problemi durante l'apertura del file",
                                     "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void writeLineColumnInStatusBar()
+        {
+            if (rtbMain.Text.Length > 0)
+            {
+                string stTextPart = rtbMain.Text.Substring(0, rtbMain.SelectionStart);
+                int line = Regex.Matches(stTextPart, @"\n").Count + 1;
+                int column = rtbMain.SelectionStart - stTextPart.LastIndexOf('\n');
+                string stToWrite = $"Linea {line}, colonna {column}";
+                toolStripStatusLabelLineColumn.Text = stToWrite;
+            }
+            else
+            {
+                toolStripStatusLabelLineColumn.Text = "Linea 1, colonna 1";
             }
         }
 
@@ -367,6 +385,7 @@ namespace Notepad2023
         {
             rtbMain.WordWrap = aCapoAutomaticoToolStripMenuItem.Checked;
             vaiAToolStripMenuItem.Enabled = !rtbMain.WordWrap;
+            writeLineColumnInStatusBar();
         }
 
         private void carattereToolStripMenuItem_Click(object sender, EventArgs e)
