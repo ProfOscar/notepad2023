@@ -29,6 +29,7 @@ namespace Notepad2023
 
         string filePath;
         string fileName;
+        Encoding fileEncoding;
 
         string lastSavedText;
         DialogResult lastSaveAsDialogResult;
@@ -149,6 +150,8 @@ namespace Notepad2023
             SetFormTitle();
             toolStripStatusLabelLineColumn.Text = "Linea 1, colonna 1";
             toolStripStatusLabelLineEnding.Text = WIN;
+            fileEncoding = Encoding.UTF8;
+            toolStripStatusLabelEncoding.Text = fileEncoding.BodyName.ToUpper();
         }
 
         private void SetFormTitle(bool isEdited = false)
@@ -184,7 +187,7 @@ namespace Notepad2023
                     toolStripStatusLabelLineEnding.Text == MAC ? "\r" : 
                     "\n";
                 string contentToSave = rtbMain.Text.Replace("\n", lineTerminator);
-                using (StreamWriter writer = new StreamWriter(path))
+                using (StreamWriter writer = new StreamWriter(path, false, fileEncoding))
                 {
                     writer.Write(contentToSave);
                 }
@@ -210,6 +213,8 @@ namespace Notepad2023
                     if (rawText.Contains("\r\n")) toolStripStatusLabelLineEnding.Text = WIN;
                     else if (rawText.Contains("\r")) toolStripStatusLabelLineEnding.Text = MAC;
                     else if (rawText.Contains("\n")) toolStripStatusLabelLineEnding.Text = LIN;
+                    fileEncoding = reader.CurrentEncoding;
+                    toolStripStatusLabelEncoding.Text = fileEncoding.BodyName.ToUpper();
                     rtbMain.Text = rawText;
                 }
                 filePath = path;
