@@ -179,9 +179,14 @@ namespace Notepad2023
         {
             try
             {
+                string lineTerminator = 
+                    toolStripStatusLabelLineEnding.Text == WIN ? "\r\n" :
+                    toolStripStatusLabelLineEnding.Text == MAC ? "\r" : 
+                    "\n";
+                string contentToSave = rtbMain.Text.Replace("\n", lineTerminator);
                 using (StreamWriter writer = new StreamWriter(path))
                 {
-                    writer.Write(rtbMain.Text);
+                    writer.Write(contentToSave);
                 }
                 filePath = path;
                 fileName = Path.GetFileName(filePath);
