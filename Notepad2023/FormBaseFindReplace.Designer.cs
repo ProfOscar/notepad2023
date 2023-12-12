@@ -63,6 +63,7 @@
             // 
             // btnAnnulla
             // 
+            this.btnAnnulla.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAnnulla.Location = new System.Drawing.Point(243, 37);
             this.btnAnnulla.Name = "btnAnnulla";
             this.btnAnnulla.Size = new System.Drawing.Size(100, 23);
@@ -114,8 +115,8 @@
         private System.Windows.Forms.Label lblTrova;
         private System.Windows.Forms.TextBox txtTrova;
         private System.Windows.Forms.Button btnTrova;
-        private System.Windows.Forms.Button btnAnnulla;
         private System.Windows.Forms.CheckBox chkMaiuscMinusc;
         private System.Windows.Forms.CheckBox chkTestoIntorno;
+        protected System.Windows.Forms.Button btnAnnulla;
     }
 }

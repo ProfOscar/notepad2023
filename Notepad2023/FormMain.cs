@@ -483,5 +483,11 @@ namespace Notepad2023
 
         #endregion
 
+        private void trovaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFind f = new FormFind();
+            f.TopMost = true;
+            f.Show();
+        }
     }
 }
