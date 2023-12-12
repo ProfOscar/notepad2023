@@ -95,6 +95,9 @@ namespace Notepad2023
         {
             SetFormTitle(lastSavedText != rtbMain.Text);
             annullaToolStripMenuItem.Enabled = rtbMain.CanUndo || rtbMain.CanRedo;
+            trovaToolStripMenuItem.Enabled = trovaPrecedenteToolStripMenuItem.Enabled =
+                trovaSuccessivoToolStripMenuItem.Enabled = sostituisciToolStripMenuItem.Enabled =
+                rtbMain.Text.Length > 0;
         }
 
         private void rtbMain_SelectionChanged(object sender, EventArgs e)
@@ -152,6 +155,9 @@ namespace Notepad2023
             toolStripStatusLabelLineEnding.Text = WIN;
             fileEncoding = Encoding.UTF8;
             toolStripStatusLabelEncoding.Text = fileEncoding.BodyName.ToUpper();
+            trovaToolStripMenuItem.Enabled = trovaPrecedenteToolStripMenuItem.Enabled =
+                trovaSuccessivoToolStripMenuItem.Enabled = sostituisciToolStripMenuItem.Enabled = 
+                false;
         }
 
         private void SetFormTitle(bool isEdited = false)
