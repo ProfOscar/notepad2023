@@ -52,6 +52,7 @@
     <Compile Include="AboutBoxMain.Designer.cs">
       <DependentUpon>AboutBoxMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FindReplaceClass.cs" />
     <Compile Include="FormBaseFindReplace.cs">
       <SubType>Form</SubType>
     </Compile>

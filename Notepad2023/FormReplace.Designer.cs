@@ -38,20 +38,28 @@
             // 
             this.btnAnnulla.Location = new System.Drawing.Point(243, 97);
             // 
+            // chkMaiuscMinusc
+            // 
+            this.chkMaiuscMinusc.Location = new System.Drawing.Point(6, 79);
+            // 
+            // chkTestoIntorno
+            // 
+            this.chkTestoIntorno.Location = new System.Drawing.Point(6, 102);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Sostituisci:";
+            this.label1.Text = "Sostituisci con:";
             // 
             // txtSost
             // 
-            this.txtSost.Location = new System.Drawing.Point(66, 42);
+            this.txtSost.Location = new System.Drawing.Point(85, 42);
             this.txtSost.Name = "txtSost";
-            this.txtSost.Size = new System.Drawing.Size(166, 20);
+            this.txtSost.Size = new System.Drawing.Size(147, 20);
             this.txtSost.TabIndex = 7;
             // 
             // btnSostituisci
@@ -75,12 +83,15 @@
             // FormReplace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(351, 133);
+            this.ClientSize = new System.Drawing.Size(351, 127);
             this.Controls.Add(this.btnSostTutto);
             this.Controls.Add(this.btnSostituisci);
             this.Controls.Add(this.txtSost);
             this.Controls.Add(this.label1);
             this.Name = "FormReplace";
+            this.Text = "Sostituisci";
+            this.Controls.SetChildIndex(this.chkMaiuscMinusc, 0);
+            this.Controls.SetChildIndex(this.chkTestoIntorno, 0);
             this.Controls.SetChildIndex(this.btnAnnulla, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.txtSost, 0);

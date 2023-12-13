@@ -47,9 +47,9 @@
             // 
             // txtTrova
             // 
-            this.txtTrova.Location = new System.Drawing.Point(47, 12);
+            this.txtTrova.Location = new System.Drawing.Point(85, 12);
             this.txtTrova.Name = "txtTrova";
-            this.txtTrova.Size = new System.Drawing.Size(185, 20);
+            this.txtTrova.Size = new System.Drawing.Size(147, 20);
             this.txtTrova.TabIndex = 1;
             // 
             // btnTrova
@@ -60,6 +60,7 @@
             this.btnTrova.TabIndex = 2;
             this.btnTrova.Text = "Trova successivo";
             this.btnTrova.UseVisualStyleBackColor = true;
+            this.btnTrova.Click += new System.EventHandler(this.btnTrova_Click);
             // 
             // btnAnnulla
             // 
@@ -115,8 +116,8 @@
         private System.Windows.Forms.Label lblTrova;
         private System.Windows.Forms.TextBox txtTrova;
         private System.Windows.Forms.Button btnTrova;
-        private System.Windows.Forms.CheckBox chkMaiuscMinusc;
-        private System.Windows.Forms.CheckBox chkTestoIntorno;
         protected System.Windows.Forms.Button btnAnnulla;
+        protected System.Windows.Forms.CheckBox chkMaiuscMinusc;
+        protected System.Windows.Forms.CheckBox chkTestoIntorno;
     }
 }

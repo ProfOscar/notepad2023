@@ -60,6 +60,7 @@ namespace Notepad2023
             barradistatoToolStripMenuItem.Checked = true;
             barradistatoToolStripMenuItem.CheckOnClick = true;
             statusStripBottom.Visible = barradistatoToolStripMenuItem.Checked;
+            FindReplaceClass.Target = rtbMain;
             writeZoomInStatusBar();
             reset();
         }
@@ -486,6 +487,13 @@ namespace Notepad2023
         private void trovaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFind f = new FormFind();
+            f.TopMost = true;
+            f.Show();
+        }
+
+        private void sostituisciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReplace f = new FormReplace();
             f.TopMost = true;
             f.Show();
         }

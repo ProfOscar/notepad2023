@@ -15,5 +15,10 @@ namespace Notepad2023
             InitializeComponent();
             radioDown.Checked = true;
         }
+
+        private void radioUp_CheckedChanged(object sender, EventArgs e)
+        {
+            FindReplaceClass.Parameters.IsUp = radioUp.Checked;
+        }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.grpDirezione = new System.Windows.Forms.GroupBox();
-            this.radioUp = new System.Windows.Forms.RadioButton();
             this.radioDown = new System.Windows.Forms.RadioButton();
+            this.radioUp = new System.Windows.Forms.RadioButton();
             this.grpDirezione.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,17 +45,6 @@
             this.grpDirezione.TabStop = false;
             this.grpDirezione.Text = "Direzione";
             // 
-            // radioUp
-            // 
-            this.radioUp.AutoSize = true;
-            this.radioUp.Location = new System.Drawing.Point(4, 20);
-            this.radioUp.Name = "radioUp";
-            this.radioUp.Size = new System.Drawing.Size(38, 17);
-            this.radioUp.TabIndex = 0;
-            this.radioUp.TabStop = true;
-            this.radioUp.Text = "Sù";
-            this.radioUp.UseVisualStyleBackColor = true;
-            // 
             // radioDown
             // 
             this.radioDown.AutoSize = true;
@@ -67,6 +56,18 @@
             this.radioDown.Text = "Giù";
             this.radioDown.UseVisualStyleBackColor = true;
             // 
+            // radioUp
+            // 
+            this.radioUp.AutoSize = true;
+            this.radioUp.Location = new System.Drawing.Point(4, 20);
+            this.radioUp.Name = "radioUp";
+            this.radioUp.Size = new System.Drawing.Size(38, 17);
+            this.radioUp.TabIndex = 0;
+            this.radioUp.TabStop = true;
+            this.radioUp.Text = "Sù";
+            this.radioUp.UseVisualStyleBackColor = true;
+            this.radioUp.CheckedChanged += new System.EventHandler(this.radioUp_CheckedChanged);
+            // 
             // FormFind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -74,6 +75,9 @@
             this.Controls.Add(this.grpDirezione);
             this.Name = "FormFind";
             this.Text = "Trova";
+            this.Controls.SetChildIndex(this.btnAnnulla, 0);
+            this.Controls.SetChildIndex(this.chkMaiuscMinusc, 0);
+            this.Controls.SetChildIndex(this.chkTestoIntorno, 0);
             this.Controls.SetChildIndex(this.grpDirezione, 0);
             this.grpDirezione.ResumeLayout(false);
             this.grpDirezione.PerformLayout();
