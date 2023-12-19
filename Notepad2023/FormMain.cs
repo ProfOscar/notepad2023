@@ -235,6 +235,7 @@ namespace Notepad2023
                                     "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
         private void writeLineColumnInStatusBar()
         {
             // Questa if serve per un bug sull'evento SelectionChanged del RichTextBox
@@ -253,6 +254,12 @@ namespace Notepad2023
             {
                 toolStripStatusLabelLineColumn.Text = "Linea 1, colonna 1";
             }
+        }
+
+        private void writeZoomInStatusBar()
+        {
+            int n = (int)(rtbMain.ZoomFactor * 10);
+            toolStripStatusLabelZoom.Text = n + "0%";
         }
 
         #endregion
@@ -392,6 +399,60 @@ namespace Notepad2023
             rtbMain.SelectedText = "";
         }
 
+        private void cercaConBingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string url = "https://www.bing.com/search?q=";
+            // TODO: comporre la chiave di ricerca
+            string key = rtbMain.SelectedText.Trim().Substring(0, 2000);
+            Process.Start(url + key);
+        }
+
+        private void trovaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rtbMain.SelectionLength > 0)
+                FindReplaceClass.Parameters.TextToFind = rtbMain.SelectedText;
+            FormFind f = new FormFind();
+            f.TopMost = true;
+            f.Show();
+        }
+
+        private void trovaSuccessivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FindReplaceClass.Parameters.TextToFind == "")
+            {
+                trovaToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                bool originalValue = FindReplaceClass.Parameters.IsUp;
+                FindReplaceClass.Parameters.IsUp = false;
+                if (FindReplaceClass.Find() == -1) FindReplaceClass.ShowNotFoundMessage();
+                FindReplaceClass.Parameters.IsUp = originalValue;
+            }
+        }
+
+        private void trovaPrecedenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FindReplaceClass.Parameters.TextToFind == "")
+            {
+                trovaToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                bool originalValue = FindReplaceClass.Parameters.IsUp;
+                FindReplaceClass.Parameters.IsUp = true;
+                if (FindReplaceClass.Find() == -1) FindReplaceClass.ShowNotFoundMessage();
+                FindReplaceClass.Parameters.IsUp = originalValue;
+            }
+        }
+
+        private void sostituisciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReplace f = new FormReplace();
+            f.TopMost = true;
+            f.Show();
+        }
+
         private void vaiAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormGotoLine frmGotoLine = new FormGotoLine(rtbMain.Lines.Length);
@@ -447,12 +508,6 @@ namespace Notepad2023
             writeZoomInStatusBar();
         }
 
-        private void writeZoomInStatusBar()
-        {
-            int n = (int)(rtbMain.ZoomFactor * 10);
-            toolStripStatusLabelZoom.Text = n + "0%";
-        }
-
         private void barradistatoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             statusStripBottom.Visible = barradistatoToolStripMenuItem.Checked;
@@ -474,60 +529,7 @@ namespace Notepad2023
             aboutForm.ShowDialog();
         }
 
-        private void cercaConBingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string url = "https://www.bing.com/search?q=";
-            // TODO: comporre la chiave di ricerca
-            string key = rtbMain.SelectedText.Trim().Substring(0,2000);
-            Process.Start(url + key);
-        }
-
         #endregion
 
-        private void trovaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (rtbMain.SelectionLength > 0) 
-                FindReplaceClass.Parameters.TextToFind = rtbMain.SelectedText;
-            FormFind f = new FormFind();
-            f.TopMost = true;
-            f.Show();
-        }
-
-        private void sostituisciToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormReplace f = new FormReplace();
-            f.TopMost = true;
-            f.Show();
-        }
-
-        private void trovaSuccessivoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (FindReplaceClass.Parameters.TextToFind == "")
-            {
-                trovaToolStripMenuItem_Click(sender, e);
-            }
-            else
-            {
-                bool originalValue = FindReplaceClass.Parameters.IsUp;
-                FindReplaceClass.Parameters.IsUp = false;
-                if (FindReplaceClass.Find() == -1) FindReplaceClass.ShowNotFoundMessage();
-                FindReplaceClass.Parameters.IsUp = originalValue;
-            }
-        }
-
-        private void trovaPrecedenteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (FindReplaceClass.Parameters.TextToFind == "")
-            {
-                trovaToolStripMenuItem_Click(sender, e);
-            }
-            else
-            {
-                bool originalValue = FindReplaceClass.Parameters.IsUp;
-                FindReplaceClass.Parameters.IsUp = true;
-                if (FindReplaceClass.Find() == -1) FindReplaceClass.ShowNotFoundMessage();
-                FindReplaceClass.Parameters.IsUp = originalValue;
-            }
-        }
     }
 }
