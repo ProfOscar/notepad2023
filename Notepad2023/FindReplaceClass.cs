@@ -40,5 +40,15 @@ namespace Notepad2023
             Target.Focus();
             return Target.Find(Parameters.TextToFind, start, end, options);
         }
+
+        public static void ShowNotFoundMessage()
+        {
+            MessageBox.Show(
+                    $"Impossibile trovare \"{Parameters.TextToFind}\"",
+                    "Blocco note",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                    );
+        }
     }
 }

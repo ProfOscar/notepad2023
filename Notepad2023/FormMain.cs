@@ -499,5 +499,35 @@ namespace Notepad2023
             f.TopMost = true;
             f.Show();
         }
+
+        private void trovaSuccessivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FindReplaceClass.Parameters.TextToFind == "")
+            {
+                trovaToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                bool originalValue = FindReplaceClass.Parameters.IsUp;
+                FindReplaceClass.Parameters.IsUp = false;
+                if (FindReplaceClass.Find() == -1) FindReplaceClass.ShowNotFoundMessage();
+                FindReplaceClass.Parameters.IsUp = originalValue;
+            }
+        }
+
+        private void trovaPrecedenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FindReplaceClass.Parameters.TextToFind == "")
+            {
+                trovaToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                bool originalValue = FindReplaceClass.Parameters.IsUp;
+                FindReplaceClass.Parameters.IsUp = true;
+                if (FindReplaceClass.Find() == -1) FindReplaceClass.ShowNotFoundMessage();
+                FindReplaceClass.Parameters.IsUp = originalValue;
+            }
+        }
     }
 }

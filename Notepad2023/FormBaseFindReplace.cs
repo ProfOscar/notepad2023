@@ -20,6 +20,8 @@ namespace Notepad2023
         private void FormBaseFindReplace_Load(object sender, EventArgs e)
         {
             txtTrova.Text = FindReplaceClass.Parameters.TextToFind;
+            chkMaiuscMinusc.Checked = FindReplaceClass.Parameters.IsCaseSensitive;
+            chkParolaIntera.Checked = FindReplaceClass.Parameters.IsWholeWord;
         }
 
         private void btnTrova_Click(object sender, EventArgs e)
@@ -29,12 +31,8 @@ namespace Notepad2023
             FindReplaceClass.Parameters.IsWholeWord = chkParolaIntera.Checked;
             if (FindReplaceClass.Find() == -1)
             {
-                MessageBox.Show(
-                    $"Impossibile trovare \"{txtTrova.Text}\"",
-                    "Blocco note",
-                    MessageBoxButtons.OK, 
-                    MessageBoxIcon.Information
-                    );
+                this.Focus();
+                FindReplaceClass.ShowNotFoundMessage();
             }
         }
 

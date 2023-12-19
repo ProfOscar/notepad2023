@@ -13,7 +13,8 @@ namespace Notepad2023
         public FormFind()
         {
             InitializeComponent();
-            radioDown.Checked = true;
+            radioUp.Checked = FindReplaceClass.Parameters.IsUp;
+            radioDown.Checked = !radioUp.Checked;
         }
 
         private void radioUp_CheckedChanged(object sender, EventArgs e)
