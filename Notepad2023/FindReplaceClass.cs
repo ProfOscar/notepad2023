@@ -21,12 +21,24 @@ namespace Notepad2023
 
         public static int Find()
         {
+            int start = 0;
+            int end = Target.TextLength;
             RichTextBoxFinds options = RichTextBoxFinds.None;
+            if (Parameters.IsUp)
+            {
+                options |= RichTextBoxFinds.Reverse;
+                end = Target.SelectionStart;
+                if (end == 0) return -1;
+            }
+            else
+            {
+                start = Target.SelectionStart + Target.SelectionLength;
+                if (start >= end) return -1;
+            }
             if (Parameters.IsCaseSensitive) options |= RichTextBoxFinds.MatchCase;
             if (Parameters.IsWholeWord) options |= RichTextBoxFinds.WholeWord;
-            if (Parameters.IsUp) options |= RichTextBoxFinds.Reverse;
             Target.Focus();
-            return Target.Find(Parameters.TextToFind, options);
+            return Target.Find(Parameters.TextToFind, start, end, options);
         }
     }
 }
