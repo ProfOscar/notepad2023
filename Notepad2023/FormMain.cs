@@ -486,6 +486,8 @@ namespace Notepad2023
 
         private void trovaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (rtbMain.SelectionLength > 0) 
+                FindReplaceClass.Parameters.TextToFind = rtbMain.SelectedText;
             FormFind f = new FormFind();
             f.TopMost = true;
             f.Show();

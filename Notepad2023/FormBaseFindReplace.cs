@@ -17,6 +17,11 @@ namespace Notepad2023
             InitializeComponent();
         }
 
+        private void FormBaseFindReplace_Load(object sender, EventArgs e)
+        {
+            txtTrova.Text = FindReplaceClass.Parameters.TextToFind;
+        }
+
         private void btnTrova_Click(object sender, EventArgs e)
         {
             FindReplaceClass.Parameters.TextToFind = txtTrova.Text;
@@ -31,6 +36,11 @@ namespace Notepad2023
                     MessageBoxIcon.Information
                     );
             }
+        }
+
+        private void btnAnnulla_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
