@@ -77,7 +77,7 @@
             this.Text = "Trova";
             this.Controls.SetChildIndex(this.btnAnnulla, 0);
             this.Controls.SetChildIndex(this.chkMaiuscMinusc, 0);
-            this.Controls.SetChildIndex(this.chkTestoIntorno, 0);
+            this.Controls.SetChildIndex(this.chkParolaIntera, 0);
             this.Controls.SetChildIndex(this.grpDirezione, 0);
             this.grpDirezione.ResumeLayout(false);
             this.grpDirezione.PerformLayout();

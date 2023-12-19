@@ -33,7 +33,7 @@
             this.btnTrova = new System.Windows.Forms.Button();
             this.btnAnnulla = new System.Windows.Forms.Button();
             this.chkMaiuscMinusc = new System.Windows.Forms.CheckBox();
-            this.chkTestoIntorno = new System.Windows.Forms.CheckBox();
+            this.chkParolaIntera = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblTrova
@@ -83,22 +83,22 @@
             this.chkMaiuscMinusc.Text = "Maiuscole/minuscole";
             this.chkMaiuscMinusc.UseVisualStyleBackColor = true;
             // 
-            // chkTestoIntorno
+            // chkParolaIntera
             // 
-            this.chkTestoIntorno.AutoSize = true;
-            this.chkTestoIntorno.Location = new System.Drawing.Point(6, 91);
-            this.chkTestoIntorno.Name = "chkTestoIntorno";
-            this.chkTestoIntorno.Size = new System.Drawing.Size(88, 17);
-            this.chkTestoIntorno.TabIndex = 5;
-            this.chkTestoIntorno.Text = "Testo intorno";
-            this.chkTestoIntorno.UseVisualStyleBackColor = true;
+            this.chkParolaIntera.AutoSize = true;
+            this.chkParolaIntera.Location = new System.Drawing.Point(6, 91);
+            this.chkParolaIntera.Name = "chkParolaIntera";
+            this.chkParolaIntera.Size = new System.Drawing.Size(86, 17);
+            this.chkParolaIntera.TabIndex = 5;
+            this.chkParolaIntera.Text = "Parola Intera";
+            this.chkParolaIntera.UseVisualStyleBackColor = true;
             // 
             // FormBaseFindReplace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(351, 112);
-            this.Controls.Add(this.chkTestoIntorno);
+            this.Controls.Add(this.chkParolaIntera);
             this.Controls.Add(this.chkMaiuscMinusc);
             this.Controls.Add(this.btnAnnulla);
             this.Controls.Add(this.btnTrova);
@@ -120,6 +120,6 @@
         private System.Windows.Forms.Button btnTrova;
         protected System.Windows.Forms.Button btnAnnulla;
         protected System.Windows.Forms.CheckBox chkMaiuscMinusc;
-        protected System.Windows.Forms.CheckBox chkTestoIntorno;
+        protected System.Windows.Forms.CheckBox chkParolaIntera;
     }
 }

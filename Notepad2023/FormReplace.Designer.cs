@@ -44,7 +44,7 @@
             // 
             // chkTestoIntorno
             // 
-            this.chkTestoIntorno.Location = new System.Drawing.Point(6, 102);
+            this.chkParolaIntera.Location = new System.Drawing.Point(6, 102);
             // 
             // label1
             // 
@@ -91,7 +91,7 @@
             this.Name = "FormReplace";
             this.Text = "Sostituisci";
             this.Controls.SetChildIndex(this.chkMaiuscMinusc, 0);
-            this.Controls.SetChildIndex(this.chkTestoIntorno, 0);
+            this.Controls.SetChildIndex(this.chkParolaIntera, 0);
             this.Controls.SetChildIndex(this.btnAnnulla, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.txtSost, 0);

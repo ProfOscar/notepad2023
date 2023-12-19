@@ -26,7 +26,7 @@ namespace Notepad2023
         {
             FindReplaceClass.Parameters.TextToFind = txtTrova.Text;
             FindReplaceClass.Parameters.IsCaseSensitive = chkMaiuscMinusc.Checked;
-            FindReplaceClass.Parameters.IsTextAround = chkTestoIntorno.Checked;
+            FindReplaceClass.Parameters.IsWholeWord = chkParolaIntera.Checked;
             if (FindReplaceClass.Find() == -1)
             {
                 MessageBox.Show(
