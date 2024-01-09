@@ -42,9 +42,13 @@
             // 
             this.chkMaiuscMinusc.Location = new System.Drawing.Point(6, 79);
             // 
-            // chkTestoIntorno
+            // chkParolaIntera
             // 
             this.chkParolaIntera.Location = new System.Drawing.Point(6, 102);
+            // 
+            // txtTrova
+            // 
+            this.txtTrova.TextChanged += new System.EventHandler(this.txtTrova_TextChanged);
             // 
             // label1
             // 
@@ -79,6 +83,7 @@
             this.btnSostTutto.TabIndex = 9;
             this.btnSostTutto.Text = "Sostituisci tutto";
             this.btnSostTutto.UseVisualStyleBackColor = true;
+            this.btnSostTutto.Click += new System.EventHandler(this.btnSostTutto_Click);
             // 
             // FormReplace
             // 
@@ -90,6 +95,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormReplace";
             this.Text = "Sostituisci";
+            this.Controls.SetChildIndex(this.txtTrova, 0);
             this.Controls.SetChildIndex(this.chkMaiuscMinusc, 0);
             this.Controls.SetChildIndex(this.chkParolaIntera, 0);
             this.Controls.SetChildIndex(this.btnAnnulla, 0);

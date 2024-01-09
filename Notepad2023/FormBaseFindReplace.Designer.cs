@@ -51,6 +51,7 @@
             this.txtTrova.Name = "txtTrova";
             this.txtTrova.Size = new System.Drawing.Size(147, 20);
             this.txtTrova.TabIndex = 1;
+            this.txtTrova.TextChanged += new System.EventHandler(this.txtTrova_TextChanged);
             // 
             // btnTrova
             // 
@@ -116,10 +117,10 @@
         #endregion
 
         private System.Windows.Forms.Label lblTrova;
-        private System.Windows.Forms.TextBox txtTrova;
         private System.Windows.Forms.Button btnTrova;
         protected System.Windows.Forms.Button btnAnnulla;
         protected System.Windows.Forms.CheckBox chkMaiuscMinusc;
         protected System.Windows.Forms.CheckBox chkParolaIntera;
+        protected System.Windows.Forms.TextBox txtTrova;
     }
 }

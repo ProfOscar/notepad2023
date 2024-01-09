@@ -22,6 +22,7 @@ namespace Notepad2023
             txtTrova.Text = FindReplaceClass.Parameters.TextToFind;
             chkMaiuscMinusc.Checked = FindReplaceClass.Parameters.IsCaseSensitive;
             chkParolaIntera.Checked = FindReplaceClass.Parameters.IsWholeWord;
+            btnTrova.Enabled = txtTrova.TextLength > 0;
         }
 
         private void btnTrova_Click(object sender, EventArgs e)
@@ -39,6 +40,11 @@ namespace Notepad2023
         private void btnAnnulla_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtTrova_TextChanged(object sender, EventArgs e)
+        {
+            btnTrova.Enabled = txtTrova.TextLength > 0;
         }
     }
 }

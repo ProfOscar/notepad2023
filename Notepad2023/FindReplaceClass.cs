@@ -14,6 +14,7 @@ namespace Notepad2023
         public struct Parameters
         {
             public static string TextToFind = "";
+            public static string TextToReplace = "";
             public static bool IsUp = false;
             public static bool IsCaseSensitive = false;
             public static bool IsWholeWord = false;
@@ -39,6 +40,11 @@ namespace Notepad2023
             if (Parameters.IsWholeWord) options |= RichTextBoxFinds.WholeWord;
             Target.Focus();
             return Target.Find(Parameters.TextToFind, start, end, options);
+        }
+
+        internal static void ReplaceAll()
+        {
+            Target.Text = Target.Text.Replace(Parameters.TextToFind, Parameters.TextToReplace);
         }
 
         public static void ShowNotFoundMessage()
