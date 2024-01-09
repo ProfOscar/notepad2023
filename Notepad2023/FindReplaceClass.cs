@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -44,7 +45,9 @@ namespace Notepad2023
 
         internal static void ReplaceAll()
         {
-            Target.Text = Target.Text.Replace(Parameters.TextToFind, Parameters.TextToReplace);
+            RegexOptions options = Parameters.IsCaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
+            string textToFind = Parameters.IsWholeWord ? $@"\b{Parameters.TextToFind}\b": Parameters.TextToFind;
+            Target.Text = Regex.Replace(Target.Text, textToFind, Parameters.TextToReplace, options);
         }
 
         public static void ShowNotFoundMessage()
