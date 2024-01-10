@@ -74,6 +74,7 @@
             this.btnSostituisci.TabIndex = 8;
             this.btnSostituisci.Text = "Sostituisci";
             this.btnSostituisci.UseVisualStyleBackColor = true;
+            this.btnSostituisci.Click += new System.EventHandler(this.btnSostituisci_Click);
             // 
             // btnSostTutto
             // 

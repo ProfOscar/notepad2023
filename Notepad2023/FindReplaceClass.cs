@@ -43,7 +43,25 @@ namespace Notepad2023
             return Target.Find(Parameters.TextToFind, start, end, options);
         }
 
-        internal static void ReplaceAll()
+        public static int Replace()
+        {
+            //if (Parameters.IsCaseSensitive)
+            //{ 
+            //    if (Target.SelectedText == Parameters.TextToFind)
+            //        Target.SelectedText = Parameters.TextToReplace;
+            //}
+            //else
+            //{
+            //    if (Target.SelectedText.ToLower() == Parameters.TextToFind.ToLower())
+            //        Target.SelectedText = Parameters.TextToReplace;
+            //}
+            StringComparison comparison = Parameters.IsCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
+            int stComp = String.Compare(Target.SelectedText, Parameters.TextToFind, comparison);
+            if (stComp == 0) Target.SelectedText = Parameters.TextToReplace;
+            return Find();
+        }
+
+        public static void ReplaceAll()
         {
             RegexOptions options = Parameters.IsCaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
             string textToFind = Parameters.IsWholeWord ? $@"\b{Parameters.TextToFind}\b": Parameters.TextToFind;

@@ -21,6 +21,19 @@ namespace Notepad2023
             btnSostituisci.Enabled = btnSostTutto.Enabled = txtTrova.TextLength > 0;
         }
 
+        private void btnSostituisci_Click(object sender, EventArgs e)
+        {
+            FindReplaceClass.Parameters.TextToFind = txtTrova.Text;
+            FindReplaceClass.Parameters.TextToReplace = txtSost.Text;
+            FindReplaceClass.Parameters.IsCaseSensitive = chkMaiuscMinusc.Checked;
+            FindReplaceClass.Parameters.IsWholeWord = chkParolaIntera.Checked;
+            if (FindReplaceClass.Replace() == -1)
+            {
+                this.Focus();
+                FindReplaceClass.ShowNotFoundMessage();
+            }
+        }
+
         private void btnSostTutto_Click(object sender, EventArgs e)
         {
             FindReplaceClass.Parameters.TextToFind = txtTrova.Text;
